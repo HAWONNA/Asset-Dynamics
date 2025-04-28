@@ -1,0 +1,56 @@
+--- MARKDOWN CELL 1 ---
+## Asset Dynamics 
+
+![image.png](attachment:47b38635-9a72-49a7-b2ff-8f25eb12a0da.png)
+
+![image.png](attachment:6ebe1cf6-acc1-4d5c-b25b-bda1ec162493.png)
+
+--- MARKDOWN CELL 2 ---
+## GBM
+![image.png](attachment:90d0a333-c61e-4e7d-8514-dc5522f64011.png)
+
+
+![image.png](attachment:a6d46e11-f00d-401b-9552-1a9df87d0803.png)
+
+
+![image.png](attachment:15ef5e73-b7a6-452d-8d05-ca5de77db4c0.png)
+
+
+![image.png](attachment:f9ec2d4c-c878-4ec3-b93f-190df35fee69.png)
+
+
+![image.png](attachment:ecfcb727-3df9-468f-b9e4-17999ae64bec.png)
+
+
+--- MARKDOWN CELL 3 ---
+![image.png](attachment:d9895fee-71a0-4e8e-a0c3-1476df9d95be.png)
+
+--- MARKDOWN CELL 4 ---
+## Return,risk Distribution 파악
+
+##### 모든 return senario들의 expected return, std of return 들의 분포를 파악 
+
+--- MARKDOWN CELL 5 ---
+### Return 
+
+--- MARKDOWN CELL 6 ---
+### Risk  
+
+--- MARKDOWN CELL 7 ---
+# Price 예측 
+
+--- MARKDOWN CELL 8 ---
+### 1개 Senario
+
+--- MARKDOWN CELL 9 ---
+## 10000개 Senarios
+
+--- MARKDOWN CELL 10 ---
+## Applying on Option market
+
+--- MARKDOWN CELL 11 ---
+# Call option, long 가정 
+
+--- MARKDOWN CELL 12 ---
+## Option 행사한 return들의 distribution 
+
