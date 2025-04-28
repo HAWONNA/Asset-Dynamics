@@ -329,4 +329,4 @@ def main():
     print("  5. 이 모델은 Black-Scholes 옵션 가격 모델의 기초입니다.")
 
 if __name__ == "__main__":
-    main() 
+    main()
