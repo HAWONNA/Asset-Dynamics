@@ -1,167 +1,168 @@
 # Asset-Dynamics
 
-금융 자산 가격의 움직임을 모델링하는 다양한 방법론을 구현하고 분석하는 프로젝트입니다. 이 레포지토리는 자산 가격 동학(Asset Dynamics)의 여러 모델들을 파이썬으로 구현하고, 실제 금융 시장 데이터에 적용하여 분석합니다.
+This project implements and analyzes various methodologies for modeling the movements of financial asset prices. This repository implements multiple models of asset dynamics in Python and applies them to real financial market data for analysis.
 
-## 목차
+## Table of Contents
 
-1. [소개](#소개)
-2. [모델 개요](#모델-개요)
-   - [가산적 모델 (Addictive Model)](#가산적-모델-addictive-model)
-   - [승법적 모델 (Multiplicative Model)](#승법적-모델-multiplicative-model)
-   - [랜덤 워크 (Random Walk)](#랜덤-워크-random-walk)
-   - [위너 과정 (Wiener Process)](#위너-과정-wiener-process)
-   - [기하 위너 과정 (Geometric Wiener Process)](#기하-위너-과정-geometric-wiener-process)
-   - [기하 브라운 운동 (Geometric Brownian Motion, GBM)](#기하-브라운-운동-geometric-brownian-motion-gbm)
-3. [응용](#응용)
-   - [옵션 시장 적용](#옵션-시장-적용)
-4. [설치 및 사용 방법](#설치-및-사용-방법)
-5. [의존성 패키지](#의존성-패키지)
+1. [Introduction](#introduction)
+2. [Model Overview](#model-overview)
+   - [Additive Model](#additive-model)
+   - [Multiplicative Model](#multiplicative-model)
+   - [Random Walk](#random-walk)
+   - [Wiener Process](#wiener-process)
+   - [Geometric Wiener Process](#geometric-wiener-process)
+   - [Geometric Brownian Motion (GBM)](#geometric-brownian-motion-gbm)
+3. [Applications](#applications)
+   - [Option Market Applications](#option-market-applications)
+4. [Installation and Usage](#installation-and-usage)
+5. [Dependencies](#dependencies)
 
-## 소개
+## Introduction
 
-자산 가격 동학(Asset Dynamics)은 금융 시장에서 자산 가격의 변화를 모델링하는 수학적 방법론을 연구하는 분야입니다. 이 프로젝트는 다양한 자산 가격 모델링 방법론을 파이썬으로 구현하고, 실제 데이터에 적용하여, 그 예측 성능과 특성을 분석합니다.
+Asset Dynamics is a field of study that focuses on mathematical methodologies for modeling changes in asset prices in financial markets. This project implements various asset pricing models in Python, applies them to real data, and analyzes their predictive performance and characteristics.
 
-## 모델 개요
+## Model Overview
 
-### 가산적 모델 (Addictive Model)
+### Additive Model
 
-가산적 모델은 자산 가격의 변화가 이전 가격에 고정된 증분을 더하는 방식으로 진행된다고 가정합니다.
+The additive model assumes that asset price changes occur by adding a fixed increment to the previous price.
 
 ```
 S(t+1) = S(t) + μ + σε
 ```
 
-여기서:
-- S(t)는 시간 t에서의 자산 가격
-- μ는 평균 변화량(드리프트)
-- σ는 변동성(표준편차)
-- ε는 표준 정규 분포를 따르는 랜덤 변수
+Where:
+- S(t): asset price at time t
+- μ: mean change (drift)
+- σ: volatility (standard deviation)
+- ε: random variable following the standard normal distribution
 
-이 모델은 단순하지만, 자산 가격이 음수가 될 수 있는 비현실적인 상황을 허용한다는 단점이 있습니다.
+Although simple, this model allows asset prices to become negative, which is unrealistic.
 
-### 승법적 모델 (Multiplicative Model)
+### Multiplicative Model
 
-승법적 모델은 자산 가격의 변화가 이전 가격에 비례하여 발생한다고 가정합니다.
+The multiplicative model assumes that asset price changes occur in proportion to the current price.
 
 ```
 S(t+1) = S(t) × (1 + μ + σε)
 ```
 
-여기서:
-- S(t)는 시간 t에서의 자산 가격
-- μ는 평균 수익률
-- σ는 수익률의 변동성
-- ε는 표준 정규 분포를 따르는 랜덤 변수
+Where:
+- S(t): asset price at time t
+- μ: average return
+- σ: return volatility
+- ε: random variable following the standard normal distribution
 
-이 모델은 자산 가격이 항상 양수를 유지한다는 점에서 가산적 모델보다 현실적입니다.
+This model is more realistic than the additive model because asset prices always remain positive.
 
-### 랜덤 워크 (Random Walk)
+### Random Walk
 
-랜덤 워크 모델은 자산 가격의 다음 단계 변화가 현재 가격과 독립적인 랜덤 값에 의해 결정된다고 가정합니다.
+The random walk model assumes that the change in the asset price at the next step is determined by a random value independent of the current price.
 
 ```
 S(t+1) = S(t) + ε
 ```
 
-여기서:
-- S(t)는 시간 t에서의 자산 가격
-- ε는 독립적이고 동일하게 분포된(i.i.d.) 랜덤 변수
+Where:
+- S(t): asset price at time t
+- ε: independent and identically distributed (i.i.d.) random variable
 
-이 모델은 효율적 시장 가설(EMH)과 밀접하게 연관되어 있으며, 시장 가격이 모든 공개 정보를 즉시 반영한다는 가정에 기초합니다.
+This model is closely related to the Efficient Market Hypothesis (EMH), which assumes that market prices instantly reflect all publicly available information.
 
-### 위너 과정 (Wiener Process)
+### Wiener Process
 
-위너 과정(브라운 운동이라고도 함)은 연속 시간에서의 랜덤 워크를 일반화한 것입니다. 이는 다음과 같은 특성을 가집니다:
+The Wiener process (also known as Brownian motion) is a generalization of the random walk in continuous time. It has the following properties:
 
-1. W(0) = 0
-2. W(t)는 독립 증분을 가짐
-3. W(t+s) - W(t)는 평균 0, 분산 s의 정규 분포를 따름
-4. W(t)는 연속 경로를 가짐
+1. W(0) = 0  
+2. W(t) has independent increments  
+3. W(t+s) - W(t) follows a normal distribution with mean 0 and variance s  
+4. W(t) has continuous paths
 
-수학적으로:
+Mathematically:
 ```
 dW(t) = ε√dt
 ```
 
-여기서:
-- dW(t)는 위너 과정의 증분
-- ε는 표준 정규 분포를 따르는 랜덤 변수
-- dt는 시간의 미소 증분
+Where:
+- dW(t): increment of the Wiener process
+- ε: random variable following the standard normal distribution
+- dt: infinitesimal time increment
 
-위너 과정은 금융 모델링에서 랜덤성을 표현하는 기본 요소로 사용됩니다.
+The Wiener process is a basic building block for modeling randomness in finance.
 
-### 기하 위너 과정 (Geometric Wiener Process)
+### Geometric Wiener Process
 
-기하 위너 과정은 위너 과정을 기반으로 하지만, 자산 가격이 로그 정규 분포를 따른다고 가정합니다.
-
-```
-dS(t) = μS(t)dt + σS(t)dW(t)
-```
-
-여기서:
-- S(t)는 시간 t에서의 자산 가격
-- μ는 기대 수익률(드리프트)
-- σ는 변동성
-- dW(t)는 위너 과정의 증분
-
-### 기하 브라운 운동 (Geometric Brownian Motion, GBM)
-
-기하 브라운 운동은 금융에서 가장 널리 사용되는 연속 시간 모델 중 하나입니다. 블랙-숄즈 옵션 가격 모델의 기초가 되며, 다음과 같이 표현됩니다:
+The geometric Wiener process is based on the Wiener process but assumes that asset prices follow a log-normal distribution.
 
 ```
 dS(t) = μS(t)dt + σS(t)dW(t)
 ```
 
-이를 풀면:
+Where:
+- S(t): asset price at time t
+- μ: expected return (drift)
+- σ: volatility
+- dW(t): increment of the Wiener process
+
+### Geometric Brownian Motion (GBM)
+
+Geometric Brownian Motion is one of the most widely used continuous-time models in finance. 
+It forms the basis of the Black-Scholes option pricing model and is expressed as:
+
+```
+dS(t) = μS(t)dt + σS(t)dW(t)
+```
+
+Solution:
 
 ```
 S(t) = S(0)exp((μ - σ²/2)t + σW(t))
 ```
 
-여기서:
-- S(t)는 시간 t에서의 자산 가격
-- S(0)는 초기 자산 가격
-- μ는 기대 수익률
-- σ는 변동성
-- W(t)는 위너 과정
+Where:
+- S(t): asset price at time t
+- S(0): initial asset price
+- μ: expected return
+- σ: volatility
+- W(t): Wiener process
 
-GBM은 자산 가격이 항상 양수를 유지하고, 로그 수익률이 정규 분포를 따른다는 특성을 가집니다.
+GBM ensures that asset prices remain positive and that log-returns are normally distributed.
 
-## 응용
+## Applications
 
-### 옵션 시장 적용
+### Option Market Applications
 
-본 프로젝트는 위에서 구현한 자산 가격 모델들을 옵션 가격 평가에 적용합니다. 특히 기하 브라운 운동(GBM)을 이용하여 다음 과정을 수행합니다:
+This project applies the implemented asset price models to option pricing. In particular, using the Geometric Brownian Motion (GBM), the following steps are carried out:
 
-1. 여러 시나리오의 자산 가격 경로 시뮬레이션
-2. 만기 시점에서의 옵션 행사 결정 시뮬레이션
-3. 옵션 수익률 분포 분석
-4. 다양한 성과 지표(MDD, CVaR, 비율 등) 평가
+1. Simulate asset price paths under multiple scenarios  
+2. Simulate option exercise at maturity  
+3. Analyze the distribution of option returns  
+4. Evaluate various performance metrics (MDD, CVaR, ratios, etc.)
 
-이를 통해 옵션 투자의 위험과 수익을 평가하는 프레임워크를 제공합니다.
+This provides a framework for evaluating the risk and return of option investments.
 
-## 설치 및 사용 방법
+## Installation and Usage
 
-1. 레포지토리를 클론합니다:
+1. Clone the repository:
    ```
    git clone https://github.com/HAWONNA/Asset-Dynamics.git
    ```
 
-2. 필요한 패키지를 설치합니다:
+2. Install the required packages:
    ```
    pip install -r requirements.txt
    ```
 
-3. Jupyter Notebook 또는 Python 스크립트를 실행합니다:
+3. Run Jupyter Notebook or Python script:
    ```
    jupyter notebook asset-dynamics.ipynb
    ```
-   또는
+   or
    ```
    python asset_dynamics_main.py
    ```
 
-## 의존성 패키지
+## Dependencies
 
 - pandas
 - numpy
