@@ -2,6 +2,8 @@
 
 This project implements and analyzes various methodologies for modeling the movements of financial asset prices. This repository implements multiple models of asset dynamics in Python and applies them to real financial market data for analysis.
 
+The main objective is to perform Monte Carlo-based simulations of option pricing using the Geometric Brownian Motion (GBM) model.
+
 ## Table of Contents
 
 1. [Introduction](#introduction)
@@ -171,3 +173,7 @@ This provides a framework for evaluating the risk and return of option investmen
 - statsmodels
 - seaborn
 - pandas-datareader
+
+
+
+
